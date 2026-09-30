@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Lab0_b main.cpp
         FrequencyCounter.cpp
-        FrequencyCounter.h)
+        FrequencyCounter.h
+        FileManager.cpp
+        FileManager.h)

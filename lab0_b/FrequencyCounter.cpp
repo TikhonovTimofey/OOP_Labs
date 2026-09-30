@@ -2,24 +2,18 @@
 #include <fstream>
 #include <iostream>
 
-FrequencyCounter::FrequencyCounter(char* argv) {
-    filename = argv;
+FrequencyCounter::FrequencyCounter(FileManager *f) {
+    file = f;
 }
 
 std::multimap<int, std::string> FrequencyCounter::calculateFrequencies() {
-    std::ifstream in(filename);
-
-    if (!in.is_open()) {
-        std::cout << "Error opening input file: " << filename << "\n";
-        return {};
-    }
-
-    std::string line;
     std::map <std::string, int> frequencies;
-    std::string word;
     std::multimap <int, std::string> ans;
+
     unsigned char previous = '.';
-    while (std::getline(in, line)) {
+    std::string word;
+    std::string line;
+    while (std::getline(file->getStream(), line)) {
         for (char c: line) {
             if (isalnum(c)) {
                 word += c;
@@ -36,7 +30,6 @@ std::multimap<int, std::string> FrequencyCounter::calculateFrequencies() {
         }
 
     }
-    in.close();
 
     for (const auto& pair : frequencies) {
         ans.insert({pair.second, pair.first});

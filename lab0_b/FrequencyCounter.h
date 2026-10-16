@@ -8,7 +8,8 @@
 class FrequencyCounter {
 public:
     explicit FrequencyCounter(FileManager* f);
-    std::multimap<int, std::string> calculateFrequencies();
+    std::map <std::string, int>  calculateFrequencies();
+    static std::multimap<int, std::string> SortFrequencies(const std::map <std::string, int> &frequencies);
 private:
     FileManager *file;
 

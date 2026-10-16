@@ -7,15 +7,21 @@
 
 class FileManager {
     public:
-        explicit FileManager(char* name, char mode);
+        FileManager(const FileManager&) = delete;
+        FileManager& operator=(const FileManager&) = delete;
+        FileManager(FileManager&&) = delete;
+        FileManager& operator=(FileManager&&) = delete;
+
+        enum class Mode {READ, WRITE};
+        explicit FileManager(char* name, Mode mode);
         ~FileManager();
-    std::ifstream& getStream();
-    void csvWrite(std::multimap<int, std::string>);
+        std::ifstream& getStream();
+        void csvWrite(const std::string& header, std::multimap<int, std::string>);
     private:
         std::string filename;
         std::ifstream in;
         std::ofstream out;
-        char m;
+        Mode m;
 
 
 };
